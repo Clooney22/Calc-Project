@@ -56,7 +56,6 @@ class Schrodinger(object):
         self.hbar = hbar
         self.m = m
         self.t = t0
-        self.dt_ = None
         self.N = len(x)
         self.dx = self.x[1] - self.x[0]
         self.dk = 2 * np.pi / (self.N * self.dx)
@@ -99,7 +98,6 @@ class Schrodinger(object):
   
     psi_x = property(_get_psi_x, _set_psi_x)
     psi_k = property(_get_psi_k, _set_psi_k)
-    dt = property(_get_dt, _set_dt)
 
     def compute_k_from_x(self):
         self.psi_mod_k = fft(self.psi_mod_x)
@@ -121,7 +119,6 @@ class Schrodinger(object):
             in time at the end of this method will be dt * Nsteps.
             default is N = 1
         """
-        self.dt = dt
 
         if Nsteps > 0:
             self.psi_mod_x *= self.x_evolve_half
@@ -140,7 +137,6 @@ class Schrodinger(object):
 
         self.compute_k_from_x()
 
-        self.t += dt * Nsteps
 
 
 ######################################################################
@@ -178,10 +174,9 @@ def square_barrier(x, width, height):
     return height * (theta(x) - theta(x - width))
 
 ######################################################################
-# Create the animation
+""" # Create the animation
 
 # specify time steps and duration
-dt = 0.01
 N_steps = 50
 t_max = 120
 frames = int(t_max / float(N_steps * dt))
@@ -219,7 +214,7 @@ S = Schrodinger(x=x,
                 V_x=V_x,
                 hbar=hbar,
                 m=m,
-                k0=-28)
+                k0=-28)"""
 
 ######################################################################
 # Set up plot
