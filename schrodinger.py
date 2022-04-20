@@ -20,7 +20,7 @@ class Schrodinger(object):
     Schrodinger equation for an arbitrary potential
     """
     def __init__(self, x, psi_x0, V_x,
-                 k0 = None, hbar=1, m=1, t0=0.0):
+                 k0 = None, hbar=1, m=1, t0=randint(0,100):
         """
         Parameters
         ----------
@@ -96,19 +96,7 @@ class Schrodinger(object):
     def _get_psi_k(self):
         return self.psi_mod_k * np.exp(-1j * self.x[0] * 
                                         self.dk * np.arange(self.N))
-    
-    def _get_dt(self):
-        return self.dt_
-
-    def _set_dt(self, dt):
-        if dt != self.dt_:
-            self.dt_ = dt
-            self.x_evolve_half = np.exp(-0.5 * 1j * self.V_x
-                                         / self.hbar * dt )
-            self.x_evolve = self.x_evolve_half * self.x_evolve_half
-            self.k_evolve = np.exp(-0.5 * 1j * self.hbar /
-                                    self.m * (self.k * self.k) * dt)
-    
+  
     psi_x = property(_get_psi_x, _set_psi_x)
     psi_k = property(_get_psi_k, _set_psi_k)
     dt = property(_get_dt, _set_dt)
